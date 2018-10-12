@@ -9,9 +9,8 @@ That's awesome!. If you have a specific one in mind go for it, otherwise just pi
 If you expect that it would take you a while (which is no problem) you can open a PR with your working progress to let everybody know you are working on it.
 To add component (or API) you should do the following steps:
 
-- Implement your component in a file `myComponentRe.re`
-- Add an interface `myComponentRe.rei` and think about which things should be exposed.
-- Add your new component to `reactNative.re` following the existing code base.
+- Implement your component in a file `navigation.re`
+- Add an interface `navigation.rei` and think about which things should be exposed.
 
 Some things to keep in mind:
 
