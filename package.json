@@ -7,7 +7,9 @@
     "start-docs": "live-server docs",
     "start": "bsb -make-world -w",
     "clean-build": "bsb -clean-world -make-world",
-    "test": "exit 0"
+    "test": "exit 0",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
   },
   "license": "MIT",
   "keywords": [
