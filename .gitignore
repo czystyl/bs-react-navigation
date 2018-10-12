@@ -7,4 +7,5 @@ lib/ocaml
 .vscode
 package-lock.json
 npm-debug.log
-
+.bsb.lock
+yarn-error.log

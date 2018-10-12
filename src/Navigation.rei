@@ -1,1 +1,1 @@
-let greetings: string => string;
+let greeting: string => string;

@@ -17,6 +17,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "packagerOpts": {
+      "config": "rn-cli.config.js"
+    },
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
