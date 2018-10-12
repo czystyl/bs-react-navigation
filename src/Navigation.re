@@ -1,1 +1,1 @@
-let greetings = name => "Welcome " ++ name;
+let greeting = name => "Welcome to " ++ name ++ " !!!";

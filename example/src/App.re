@@ -4,7 +4,7 @@ module Styles = {
 
   let container =
     style([
-      backgroundColor(String("red")),
+      marginTop(Pt(50.0)),
       alignItems(Center),
       justifyContent(Center),
     ]);
@@ -17,7 +17,13 @@ let make = _children => {
   render: _self =>
     <SafeAreaView>
       <View style=Styles.container>
-        <Text> {ReasonReact.string("Welcome to bs-react-navigation")} </Text>
+        <Text>
+          {
+            ReasonReact.string(
+              BsReactNavigation.Navigation.greeting("bs-react-navigations"),
+            )
+          }
+        </Text>
       </View>
     </SafeAreaView>,
 };
