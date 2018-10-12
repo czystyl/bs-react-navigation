@@ -1,0 +1,1 @@
+let greetings: string => string;
