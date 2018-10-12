@@ -1,0 +1,28 @@
+{
+  "name": "bs-react-native-playground",
+  "main": "node_modules/expo/AppEntry.js",
+  "private": true,
+  "author": {
+    "name": "Luke Czyszczonik",
+    "email": "lukasz.czyszczonik@gmail.com"
+  },
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "eject": "expo eject",
+    "build": "bsb -make-world -clean-world"
+  },
+  "dependencies": {
+    "bs-platform": "^4.0.6",
+    "bs-react-native": "^0.10.0",
+    "bs-react-navigation": "../../bs-react-navigation",
+    "expo": "^30.0.1",
+    "react": "16.5.2",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "reason-react": "^0.5.3"
+  },
+  "devDependencies": {
+    "all-contributors-cli": "^5.4.0"
+  }
+}
