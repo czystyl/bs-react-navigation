@@ -1,0 +1,41 @@
+{
+  "name": "bs-react-navigation",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "bsb -make-world",
+    "build-docs": "sh ./docs/scripts/build-docs.sh",
+    "start-docs": "live-server docs",
+    "start": "bsb -make-world -w",
+    "clean-build": "bsb -clean-world -make-world",
+    "test": "exit 0"
+  },
+  "license": "MIT",
+  "keywords": [
+    "reason",
+    "reasonml",
+    "bucklescript",
+    "react-native",
+    "react-navigation"
+  ],
+  "author": {
+    "name": "Luke Czyszczonik",
+    "email": "lukasz.czyszczonik@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reasonml-community/bs-react-navigation.git"
+  },
+  "devDependencies": {
+    "all-contributors-cli": "^5.4.0",
+    "bs-platform": "^4.0.6",
+    "live-server": "^1.2.0",
+    "reason-react": "^0.5.3",
+    "react-native": "^0.53.3",
+    "bs-react-native": "^0.10.0"
+  },
+  "peerDependencies": {
+    "react-native": "^0.53.3",
+    "reason-react": "^0.5.3",
+    "bs-react-native": "^0.10.0"
+  }
+}
