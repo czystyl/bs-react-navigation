@@ -1,6 +1,6 @@
 {
   "name": "bs-react-navigation",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "scripts": {
     "start": "bsb -make-world -w",
     "build": "bsb -make-world",
