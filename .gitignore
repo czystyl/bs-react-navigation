@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+lib
+.merlin
+.vscode
+package-lock.json
+npm-debug.log
+docs/BsReactNative

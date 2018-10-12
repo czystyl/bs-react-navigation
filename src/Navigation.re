@@ -1,0 +1,1 @@
+let sum = (a, b) => int_of_float(a +. b);
