@@ -2,12 +2,12 @@
   "name": "bs-react-navigation",
   "version": "0.1.0",
   "scripts": {
-    "build": "bsb -make-world",
-    "build-docs": "sh ./docs/scripts/build-docs.sh",
-    "start-docs": "live-server docs",
     "start": "bsb -make-world -w",
+    "build": "bsb -make-world",
     "clean-build": "bsb -clean-world -make-world",
     "test": "exit 0",
+    "build-docs": "sh ./docs/scripts/build-docs.sh",
+    "start-docs": "live-server docs",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate"
   },

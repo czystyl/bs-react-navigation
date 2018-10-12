@@ -1,1 +1,1 @@
-let sum = (a, b) => int_of_float(a +. b);
+let greetings = name => "Welcome " ++ name;
