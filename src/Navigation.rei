@@ -1,1 +1,2 @@
-let greeting: string => string;
+let createStackNavigator:
+  (ReasonReact.reactClass, ReasonReact.reactClass) => string;
