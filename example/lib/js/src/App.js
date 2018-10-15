@@ -2,15 +2,36 @@
 'use strict';
 
 var Home = require("./Home.js");
-var Curry = require("bs-platform/lib/js/curry.js");
 var Detail = require("./Detail.js");
 var ReasonReact = require("reason-react/lib/js/src/ReasonReact.js");
-var Navigation$BsReactNavigation = require("bs-react-navigation/lib/js/src/Navigation.js");
+var StackNavigator$BsReactNavigation = require("bs-react-navigation/lib/js/src/StackNavigator.js");
 
-var component = ReasonReact.statelessComponent("Home");
+var navigationConfig = {
+  initialRouteName: "Detail"
+};
 
-var reactClass = Curry._2(Navigation$BsReactNavigation.createStackNavigator, Home.reactClass, Detail.reactClass);
+var reactClass = StackNavigator$BsReactNavigation.create(/* :: */[
+      /* tuple */[
+        "Home",
+        {
+          screen: (function () {
+              return ReasonReact.element(undefined, undefined, Home.make(/* array */[]));
+            })
+        }
+      ],
+      /* :: */[
+        /* tuple */[
+          "Detail",
+          {
+            screen: (function () {
+                return ReasonReact.element(undefined, undefined, Detail.make(/* array */[]));
+              })
+          }
+        ],
+        /* [] */0
+      ]
+    ], navigationConfig);
 
-exports.component = component;
+exports.navigationConfig = navigationConfig;
 exports.reactClass = reactClass;
-/* component Not a pure module */
+/* reactClass Not a pure module */

@@ -22,4 +22,4 @@ let make = _children => {
     </SafeAreaView>,
 };
 
-let reactClass = ReasonReact.wrapReasonForJs(~component, make);
+/* let reactClass = ReasonReact.wrapReasonForJs(~component, make); */

@@ -17,7 +17,7 @@ let make = _children => {
   render: _self =>
     <SafeAreaView>
       <View style=Styles.container>
-        <Text> {ReasonReact.string("SECOND!")} </Text>
+        <Text> {ReasonReact.string("Detail!")} </Text>
       </View>
     </SafeAreaView>,
 };
