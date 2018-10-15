@@ -1,13 +1,12 @@
 open BsReactNavigation;
 
 let navigationConfig =
-  StackNavigator.navigatorConfig(~initialRouteName="Detail");
+  StackNavigator.createNavigationConfig(~initialRouteName="Home");
+
+let routes = [
+  ("Home", StackNavigator.createRoute(~screen=() => <Home />)),
+  ("Detail", StackNavigator.createRoute(~screen=() => <Detail />)),
+];
 
 let reactClass =
-  StackNavigator.create(
-    ~routes=[
-      ("Home", StackNavigator.routeConfig(~screen=() => <Home />)),
-      ("Detail", StackNavigator.routeConfig(~screen=() => <Detail />)),
-    ],
-    ~navigatorConfig=navigationConfig,
-  );
+  StackNavigator.create(~routes, ~navigatorConfig=navigationConfig);

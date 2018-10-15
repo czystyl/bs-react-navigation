@@ -7,31 +7,38 @@ var ReasonReact = require("reason-react/lib/js/src/ReasonReact.js");
 var StackNavigator$BsReactNavigation = require("bs-react-navigation/lib/js/src/StackNavigator.js");
 
 var navigationConfig = {
-  initialRouteName: "Detail"
+  initialRouteName: "Home"
 };
 
-var reactClass = StackNavigator$BsReactNavigation.create(/* :: */[
-      /* tuple */[
-        "Home",
-        {
-          screen: (function () {
-              return ReasonReact.element(undefined, undefined, Home.make(/* array */[]));
-            })
-        }
-      ],
-      /* :: */[
-        /* tuple */[
-          "Detail",
-          {
-            screen: (function () {
-                return ReasonReact.element(undefined, undefined, Detail.make(/* array */[]));
-              })
-          }
-        ],
-        /* [] */0
-      ]
-    ], navigationConfig);
+var routes_000 = /* tuple */[
+  "Home",
+  {
+    screen: (function () {
+        return ReasonReact.element(undefined, undefined, Home.make(/* array */[]));
+      })
+  }
+];
+
+var routes_001 = /* :: */[
+  /* tuple */[
+    "Detail",
+    {
+      screen: (function () {
+          return ReasonReact.element(undefined, undefined, Detail.make(/* array */[]));
+        })
+    }
+  ],
+  /* [] */0
+];
+
+var routes = /* :: */[
+  routes_000,
+  routes_001
+];
+
+var reactClass = StackNavigator$BsReactNavigation.create(routes, navigationConfig);
 
 exports.navigationConfig = navigationConfig;
+exports.routes = routes;
 exports.reactClass = reactClass;
 /* reactClass Not a pure module */
