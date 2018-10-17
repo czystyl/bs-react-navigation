@@ -1,0 +1,45 @@
+version: 2
+
+defaults: &defaults
+    working_directory: ~/bs-react-navigation
+    docker:
+        - image: circleci/node:9
+
+jobs:
+    install-dependencies:
+        <<: *defaults
+        steps:
+            - checkout
+            - attach_workspace:
+                at: ~/bs-react-navigation
+            - restore_cache:
+                keys:
+                - v1-24-dependencies-{{ checksum "yarn.lock" }}
+                - v1-24-dependencies-
+            - run:
+                name: Install Dependencies
+                command: yarn
+            - save_cache:
+                key: v1-24-dependencies-{{ checksum "yarn.lock" }}
+                paths:
+                    - node_modules
+            - persist_to_workspace:
+                root: .
+                paths: .
+    clean-build:
+        <<: *defaults
+        steps:
+            - attach_workspace:
+                at: ~/bs-react-navigation
+            - run: 
+                name: Clean Build
+                command: yarn clean-build
+                
+workflows:
+    version: 2
+    test:
+        jobs:
+        - install-dependencies
+        - clean-build:
+            requires:
+                - install-dependencies
