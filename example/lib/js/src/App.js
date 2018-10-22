@@ -2,43 +2,44 @@
 'use strict';
 
 var Home = require("./Home.js");
-var Detail = require("./Detail.js");
+var Details = require("./Details.js");
 var ReasonReact = require("reason-react/lib/js/src/ReasonReact.js");
 var StackNavigator$BsReactNavigation = require("bs-react-navigation/lib/js/src/StackNavigator.js");
 
-var navigationConfig = {
-  initialRouteName: "Home"
-};
-
-var routes_000 = /* tuple */[
-  "Home",
-  {
-    screen: (function () {
-        return ReasonReact.element(undefined, undefined, Home.make(/* array */[]));
-      })
+function mapRoute(r) {
+  if (r) {
+    return /* tuple */[
+            "Details",
+            /* record */[/* screen */ReasonReact.wrapReasonForJs(Details.component, Details.make)]
+          ];
+  } else {
+    return /* tuple */[
+            "Home",
+            /* record */[/* screen */ReasonReact.wrapReasonForJs(Home.component, Home.make)]
+          ];
   }
+}
+
+var Config_000 = /* routes : :: */[
+  /* Home */0,
+  /* :: */[
+    /* Details */["params"],
+    /* [] */0
+  ]
 ];
 
-var routes_001 = /* :: */[
-  /* tuple */[
-    "Detail",
-    {
-      screen: (function () {
-          return ReasonReact.element(undefined, undefined, Detail.make(/* array */[]));
-        })
-    }
-  ],
-  /* [] */0
+var Config = /* module */[
+  Config_000,
+  /* mapRoute */mapRoute
 ];
 
-var routes = /* :: */[
-  routes_000,
-  routes_001
-];
+var include = StackNavigator$BsReactNavigation.CreateStackNavigator(Config);
 
-var reactClass = StackNavigator$BsReactNavigation.create(routes, navigationConfig);
+var reactClass = ReasonReact.wrapReasonForJs(Home.component, Home.make);
 
-exports.navigationConfig = navigationConfig;
-exports.routes = routes;
+var StackNavigator = include[0];
+
+exports.Config = Config;
+exports.StackNavigator = StackNavigator;
 exports.reactClass = reactClass;
-/* reactClass Not a pure module */
+/* include Not a pure module */

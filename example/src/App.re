@@ -1,12 +1,39 @@
 open BsReactNavigation;
 
-let navigationConfig =
-  StackNavigator.createNavigationConfig(~initialRouteName="Home");
+module Config = {
+  type routes =
+    | Home
+    | Details(string);
 
-let routes = [
-  ("Home", StackNavigator.createRoute(~screen=() => <Home />)),
-  ("Detail", StackNavigator.createRoute(~screen=() => <Detail />)),
-];
+  type routeConfig = {screen: ReasonReact.reactClass};
+
+  type config = {component: ReasonReact.reactClass};
+
+  let routes = [Home, Details("params")];
+
+  let mapRoute = r =>
+    switch (r) {
+    | Home => (
+        "Home",
+        {
+          screen:
+            ReasonReact.wrapReasonForJs(~component=Home.component, Home.make),
+        },
+      )
+    | Details(_) => (
+        "Details",
+        {
+          screen:
+            ReasonReact.wrapReasonForJs(
+              ~component=Details.component,
+              Details.make,
+            ),
+        },
+      )
+    };
+};
+
+include StackNavigator.CreateStackNavigator(Config);
 
 let reactClass =
-  StackNavigator.create(~routes, ~navigatorConfig=navigationConfig);
+  ReasonReact.wrapReasonForJs(~component=Home.component, Home.make);

@@ -1,20 +1,21 @@
-type t;
+module type Configuration = {
+  type routes;
+  type routeConfig = {screen: ReasonReact.reactClass};
 
-[@bs.deriving abstract]
-type createRoute = {screen: unit => ReasonReact.reactElement};
+  let routes: list(routes);
+  let mapRoute: routes => (string, routeConfig);
+};
 
-[@bs.deriving abstract]
-type createNavigationConfig = {initialRouteName: string};
+module CreateStackNavigator = (Config: Configuration) => {
+  module StackNavigator = {
+    [@bs.module "react-navigation"]
+    external _createStackNavigator:
+      Js.Dict.t(Config.routes) => ReasonReact.reactElement =
+      "createStackNavigator";
 
-type routes = list((string, createRoute));
+    let generateJsStackNavigatorConfig =
+      Config.routes |> List.map(Config.mapRoute) |> Js.Dict.fromList;
 
-[@bs.module "react-navigation"]
-external _createStackNavigator:
-  (Js.Dict.t(createRoute), createNavigationConfig) => ReasonReact.reactElement =
-  "createStackNavigator";
-
-let create = (~routes: routes, ~navigatorConfig: createNavigationConfig) => {
-  let jsRoutes = routes |> Js.Dict.fromList;
-
-  _createStackNavigator(jsRoutes, navigatorConfig);
+    Js.log(generateJsStackNavigatorConfig);
+  };
 };
