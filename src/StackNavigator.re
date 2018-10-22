@@ -1,6 +1,9 @@
 [@bs.deriving jsConverter]
 type routeConfiguration = {screen: ReasonReact.reactClass};
 
+[@bs.deriving jsConverter]
+type stackConfiguration = {initialRoute: string};
+
 module type Configuration = {
   type routes;
 
@@ -27,6 +30,6 @@ module CreateStackNavigator = (Config: Configuration) => {
       )
       |> Js.Dict.fromList;
 
-    let navigatorComponent = _createStackNavigator(stackConfig);
+    let navigator = _createStackNavigator(stackConfig);
   };
 };

@@ -68,10 +68,10 @@ function make() {
         ];
 }
 
-var rc = ReasonReact.wrapReasonForJs(component, make);
+var reactComponent = ReasonReact.wrapReasonForJs(component, make);
 
 exports.Styles = Styles;
 exports.component = component;
 exports.make = make;
-exports.rc = rc;
+exports.reactComponent = reactComponent;
 /* container Not a pure module */

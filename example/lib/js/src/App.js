@@ -3,19 +3,18 @@
 
 var Home = require("./Home.js");
 var Details = require("./Details.js");
-var ReasonReact = require("reason-react/lib/js/src/ReasonReact.js");
 var StackNavigator$BsReactNavigation = require("bs-react-navigation/lib/js/src/StackNavigator.js");
 
 function mapRoute(r) {
   if (r) {
     return /* tuple */[
             "Details",
-            /* record */[/* screen */ReasonReact.wrapReasonForJs(Details.component, Details.make)]
+            /* record */[/* screen */Details.reactComponent]
           ];
   } else {
     return /* tuple */[
             "Home",
-            /* record */[/* screen */ReasonReact.wrapReasonForJs(Home.component, Home.make)]
+            /* record */[/* screen */Home.reactComponent]
           ];
   }
 }
@@ -23,7 +22,7 @@ function mapRoute(r) {
 var Config_000 = /* routes : :: */[
   /* Home */0,
   /* :: */[
-    /* Details */["params"],
+    /* Details */1,
     /* [] */0
   ]
 ];
@@ -37,7 +36,7 @@ var include = StackNavigator$BsReactNavigation.CreateStackNavigator(Config);
 
 var StackNavigator = include[0];
 
-var reactClass = StackNavigator[/* navigatorComponent */0];
+var reactClass = StackNavigator[/* navigator */0];
 
 exports.Config = Config;
 exports.StackNavigator = StackNavigator;

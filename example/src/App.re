@@ -5,32 +5,17 @@ module Config = {
 
   type routes =
     | Home
-    | Details(string);
+    | Details;
 
-  let routes = [Home, Details("params")];
+  let routes = [Home, Details];
 
   let mapRoute = r =>
     switch (r) {
-    | Home => (
-        "Home",
-        {
-          screen:
-            ReasonReact.wrapReasonForJs(~component=Home.component, Home.make),
-        },
-      )
-    | Details(_) => (
-        "Details",
-        {
-          screen:
-            ReasonReact.wrapReasonForJs(
-              ~component=Details.component,
-              Details.make,
-            ),
-        },
-      )
+    | Home => ("Home", {screen: Home.reactComponent})
+    | Details => ("Details", {screen: Details.reactComponent})
     };
 };
 
 include StackNavigator.CreateStackNavigator(Config);
 
-let reactClass = StackNavigator.navigatorComponent;
+let reactClass = StackNavigator.navigator;
