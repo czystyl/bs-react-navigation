@@ -1,13 +1,12 @@
+type routeConfiguration = {screen: ReasonReact.reactClass};
+
 module type Configuration = {
   type routes;
-  type routeConfig = {screen: ReasonReact.reactClass};
+  type routeConfig;
   let routes: list(routes);
-  let mapRoute: routes => (string, routeConfig);
+  let mapRoute: routes => (string, routeConfiguration);
 };
 module CreateStackNavigator:
   (Config: Configuration) =>
-   {
-    module StackNavigator: {
-      let generateJsStackNavigatorConfig: Js.Dict.t(Config.routeConfig);
-    };
+   {module StackNavigator: {let navigatorComponent: ReasonReact.reactElement;};
   };

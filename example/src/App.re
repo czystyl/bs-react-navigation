@@ -7,8 +7,6 @@ module Config = {
 
   type routeConfig = {screen: ReasonReact.reactClass};
 
-  type config = {component: ReasonReact.reactClass};
-
   let routes = [Home, Details("params")];
 
   let mapRoute = r =>
@@ -35,5 +33,4 @@ module Config = {
 
 include StackNavigator.CreateStackNavigator(Config);
 
-let reactClass =
-  ReasonReact.wrapReasonForJs(~component=Home.component, Home.make);
+let reactClass = StackNavigator.navigatorComponent;
