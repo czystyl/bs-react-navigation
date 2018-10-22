@@ -1,11 +1,11 @@
 open BsReactNavigation;
 
 module Config = {
+  open StackNavigator;
+
   type routes =
     | Home
     | Details(string);
-
-  type routeConfig = {screen: ReasonReact.reactClass};
 
   let routes = [Home, Details("params")];
 
