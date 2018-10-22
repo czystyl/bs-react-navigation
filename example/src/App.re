@@ -7,6 +7,8 @@ module Config = {
     | Home
     | Details;
 
+  let navigatorConfig = {initialRouteName: "Home"};
+
   let routes = [Home, Details];
 
   let mapRoute = r =>

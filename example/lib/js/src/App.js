@@ -19,7 +19,9 @@ function mapRoute(r) {
   }
 }
 
-var Config_000 = /* routes : :: */[
+var Config_000 = /* navigatorConfig : record */[/* initialRouteName */"Home"];
+
+var Config_001 = /* routes : :: */[
   /* Home */0,
   /* :: */[
     /* Details */1,
@@ -29,6 +31,7 @@ var Config_000 = /* routes : :: */[
 
 var Config = /* module */[
   Config_000,
+  Config_001,
   /* mapRoute */mapRoute
 ];
 
