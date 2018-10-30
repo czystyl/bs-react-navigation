@@ -2,11 +2,11 @@
 type routeConfiguration = {screen: ReasonReact.reactClass};
 
 [@bs.deriving jsConverter]
-type navigatorConfig = {initialRouteName: string};
+type navigatorConfig('a) = {initialRouteName: 'a};
 
 module type Configuration = {
   type routes;
-  let navigatorConfig: navigatorConfig;
+  let navigatorConfig: navigatorConfig(routes);
   let routes: list(routes);
   let mapRoute: routes => (string, routeConfiguration);
 };
@@ -22,17 +22,18 @@ module CreateStackNavigator = (Config: Configuration) => {
       ReasonReact.reactElement =
       "createStackNavigator";
 
-    let stackConfig =
+    let routes =
       Config.routes
       |> List.map(route => {
            let (name, configuration) = Config.mapRoute(route);
-
            (name, routeConfigurationToJs(configuration));
          })
       |> Js.Dict.fromList;
 
-    let sConfig = navigatorConfigToJs(Config.navigatorConfig);
+    let (initialName, _) =
+      Config.mapRoute(Config.navigatorConfig.initialRouteName);
 
-    let navigator = _createSN(stackConfig, sConfig);
+    let sConfig = navigatorConfigToJs({initialRouteName: initialName});
+    let navigator = _createSN(routes, sConfig);
   };
 };

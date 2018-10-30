@@ -19,7 +19,7 @@ function mapRoute(r) {
   }
 }
 
-var Config_000 = /* navigatorConfig : record */[/* initialRouteName */"Home"];
+var Config_000 = /* navigatorConfig : record */[/* initialRouteName : Details */1];
 
 var Config_001 = /* routes : :: */[
   /* Home */0,
