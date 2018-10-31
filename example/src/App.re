@@ -13,11 +13,10 @@ module Config = {
 
   let mapRoute = r =>
     switch (r) {
-    | Home => ("Home", {screen: Home.reactComponent})
-    | Details => ("Details", {screen: Details.reactComponent})
+    | Home => ("Home", {screen: (Home.component, Home.make)})
+    | Details => ("Details", {screen: (Details.component, Details.make)})
     };
 };
 
 include StackNavigator.CreateStackNavigator(Config);
-
 let reactClass = StackNavigator.navigator;

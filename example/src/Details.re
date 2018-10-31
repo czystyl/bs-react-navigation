@@ -21,5 +21,3 @@ let make = _children => {
       </View>
     </SafeAreaView>,
 };
-
-let reactComponent = ReasonReact.wrapReasonForJs(~component, make);

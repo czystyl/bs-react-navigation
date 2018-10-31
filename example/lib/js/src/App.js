@@ -9,12 +9,18 @@ function mapRoute(r) {
   if (r) {
     return /* tuple */[
             "Details",
-            /* record */[/* screen */Details.reactComponent]
+            /* record */[/* screen : tuple */[
+                Details.component,
+                Details.make
+              ]]
           ];
   } else {
     return /* tuple */[
             "Home",
-            /* record */[/* screen */Home.reactComponent]
+            /* record */[/* screen : tuple */[
+                Home.component,
+                Home.make
+              ]]
           ];
   }
 }
