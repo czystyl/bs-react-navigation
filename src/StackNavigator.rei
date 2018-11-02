@@ -7,7 +7,7 @@ type component =
     ReasonReact.actionless,
   );
 type make =
-  (~navigation: string, array(ReasonReact.reactClass)) =>
+  (~navigation: string, array(ReasonReact.reactElement)) =>
   ReasonReact.componentSpec(
     ReasonReact.stateless,
     ReasonReact.stateless,

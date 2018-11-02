@@ -15,11 +15,21 @@ let component = ReasonReact.statelessComponent("App");
 let make = (~navigation: string, _children) => {
   ...component,
   render: _self => {
-    Js.log2("1elo", navigation);
+    let toDetails = [%raw
+      {|
+      function(navigation) {
+        navigation.navigation.navigate("Details");
+      }
+    |}
+    ];
 
     <SafeAreaView>
       <View style=Styles.container>
-        <Text> {ReasonReact.string("HOME")} </Text>
+        <Text> {ReasonReact.string("HOME!")} </Text>
+        <Button
+          title="Go to details screen "
+          onPress={() => toDetails(navigation)}
+        />
       </View>
     </SafeAreaView>;
   },
