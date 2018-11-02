@@ -9,23 +9,17 @@ function mapRoute(r) {
   if (r) {
     return /* tuple */[
             "Details",
-            /* record */[/* screen : tuple */[
-                Details.component,
-                Details.make
-              ]]
+            /* record */[/* screen */Details.make]
           ];
   } else {
     return /* tuple */[
             "Home",
-            /* record */[/* screen : tuple */[
-                Home.component,
-                Home.make
-              ]]
+            /* record */[/* screen */Home.make]
           ];
   }
 }
 
-var Config_000 = /* navigatorConfig : record */[/* initialRouteName : Details */1];
+var Config_000 = /* navigatorConfig : record */[/* initialRouteName : Home */0];
 
 var Config_001 = /* routes : :: */[
   /* Home */0,

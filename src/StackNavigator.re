@@ -1,4 +1,3 @@
-
 type component =
   ReasonReact.componentSpec(
     ReasonReact.stateless,
@@ -8,7 +7,7 @@ type component =
     ReasonReact.actionless,
   );
 type make =
-  unit =>
+  (~navigation: string, array(ReasonReact.reactClass)) =>
   ReasonReact.componentSpec(
     ReasonReact.stateless,
     ReasonReact.stateless,
@@ -17,11 +16,12 @@ type make =
     ReasonReact.actionless,
   );
 
-type screen = (component, make);
-type configureRoute = {screen};
+type configureRoute = {screen: make};
+
+type navWithRoute = string => ReasonReact.reactElement;
 
 [@bs.deriving jsConverter]
-type routeConfiguration = {screen: ReasonReact.reactClass};
+type routeConfiguration = {screen: navWithRoute};
 
 [@bs.deriving jsConverter]
 type navigatorConfig('a) = {initialRouteName: 'a};
@@ -37,7 +37,10 @@ module CreateStackNavigator = (Config: Configuration) => {
   module StackNavigator = {
     [@bs.module "react-navigation"]
     external _createSN:
-      (Js.Dict.t({. "screen": ReasonReact.reactClass}), {. "initialRouteName": string}) =>
+      (
+        Js.Dict.t({. "screen": navWithRoute}),
+        {. "initialRouteName": string}
+      ) =>
       ReasonReact.reactElement =
       "createStackNavigator";
 
@@ -46,11 +49,10 @@ module CreateStackNavigator = (Config: Configuration) => {
       |> List.map(route => {
            let (name, configuration) = Config.mapRoute(route);
 
-           let (component, make) = configuration.screen;
-           let wrapp = ReasonReact.wrapReasonForJs(~component, make);
-          
+           let withNavigation = navigation =>
+             ReasonReact.element(configuration.screen(~navigation, [||]));
 
-           (name, routeConfigurationToJs({screen: wrapp}));
+           (name, routeConfigurationToJs({screen: withNavigation}));
          })
       |> Js.Dict.fromList;
 

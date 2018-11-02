@@ -7,14 +7,14 @@ module Config = {
     | Home
     | Details;
 
-  let navigatorConfig = {initialRouteName: Details};
+  let navigatorConfig = {initialRouteName: Home};
 
   let routes = [Home, Details];
 
   let mapRoute = r =>
     switch (r) {
-    | Home => ("Home", {screen: (Home.component, Home.make)})
-    | Details => ("Details", {screen: (Details.component, Details.make)})
+    | Home => ("Home", {screen: Home.make})
+    | Details => ("Details", {screen: Details.make})
     };
 };
 

@@ -7,7 +7,7 @@ type component =
     ReasonReact.actionless,
   );
 type make =
-  unit =>
+  (~navigation: string, array(ReasonReact.reactClass)) =>
   ReasonReact.componentSpec(
     ReasonReact.stateless,
     ReasonReact.stateless,
@@ -16,9 +16,7 @@ type make =
     ReasonReact.actionless,
   );
 
-type screen = (component, make);
-
-type configureRoute = {screen};
+type configureRoute = {screen: make};
 
 type navigatorConfig('a) = {initialRouteName: 'a};
 

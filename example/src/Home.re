@@ -12,14 +12,15 @@ module Styles = {
 
 let component = ReasonReact.statelessComponent("App");
 
-let make = _children => {
+let make = (~navigation: string, _children) => {
   ...component,
-  render: _self =>
+  render: _self => {
+    Js.log2("1elo", navigation);
+
     <SafeAreaView>
       <View style=Styles.container>
         <Text> {ReasonReact.string("HOME")} </Text>
       </View>
-    </SafeAreaView>,
+    </SafeAreaView>;
+  },
 };
-
-let reactComponent = ReasonReact.wrapReasonForJs(~component, make);

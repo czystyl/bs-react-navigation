@@ -25,7 +25,7 @@ var Styles = /* module */[/* container */container];
 
 var component = ReasonReact.statelessComponent("App");
 
-function make() {
+function make(navigation, _) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -37,6 +37,7 @@ function make() {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function () {
+              console.log("1elo", navigation);
               return ReasonReact.element(undefined, undefined, Curry.app(SafeAreaView$BsReactNative.make, [
                               undefined,
                               undefined,
@@ -68,10 +69,7 @@ function make() {
         ];
 }
 
-var reactComponent = ReasonReact.wrapReasonForJs(component, make);
-
 exports.Styles = Styles;
 exports.component = component;
 exports.make = make;
-exports.reactComponent = reactComponent;
 /* container Not a pure module */
