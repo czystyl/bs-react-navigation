@@ -1,22 +1,36 @@
 [@bs.deriving jsConverter]
 type navigatorConfig('a) = {initialRouteName: 'a};
 
-type configureRoute = {screen: string => ReasonReact.reactElement};
-
 module type Configuration = {
   type routes;
-  
+
   let navigatorConfig: navigatorConfig(routes);
   let routes: list(routes);
-  let mapRoute: routes => (string, configureRoute);
 };
 
 module CreateStackNavigator = (Config: Configuration) => {
   module StackNavigator = {
-    type navWithRoute = string => ReasonReact.reactElement;
+    [@bs.deriving {jsConverter: newType}]
+    type navigationProps = {
+      navigate: Config.routes => unit,
+      goBack: unit => unit,
+    };
+
+    [@bs.deriving {jsConverter: newType}]
+    type navigationRecord = {navigation: abs_navigationProps};
+
+    type navigation = {navigation: navigationProps};
+
+    type configureRoute = {screen: navigation => ReasonReact.reactElement};
+
+    type mapRoute = Config.routes => (string, configureRoute);
+
+    type navWithRoute = abs_navigationRecord => ReasonReact.reactElement;
 
     [@bs.deriving jsConverter]
-    type routeConfiguration = {screen: string => ReasonReact.reactElement};
+    type routeConfiguration = {
+      screen: abs_navigationRecord => ReasonReact.reactElement,
+    };
 
     /* Bindings to the createStackNavigator */
     [@bs.module "react-navigation"]
@@ -28,27 +42,50 @@ module CreateStackNavigator = (Config: Configuration) => {
       ReasonReact.reactElement =
       "createStackNavigator";
 
-    /* List of routes transformed to the JS object with {key: value} */
-    let routes =
-      Config.routes
-      |> List.map(route => {
-           let (name, routeConfig) = Config.mapRoute(route);
-
-           let screen = navigation => routeConfig.screen(navigation);
-
-           (name, routeConfigurationToJs({screen: screen}));
-         })
-      |> Js.Dict.fromList;
-
-    /* Initial configuration */
-    let (initialRouteName, _) =
-      Config.mapRoute(Config.navigatorConfig.initialRouteName);
-
     /* React class navigator */
-    let navigator =
+    let navigator = (mapRoute: mapRoute) => {
+      /* Initial configuration */
+      let (initialRouteName, _) =
+        mapRoute(Config.navigatorConfig.initialRouteName);
+
+      /* List of routes transformed to the JS object with {key: value} */
+      let routes =
+        Config.routes
+        |> List.map(route => {
+             let (name, routeConfig) = mapRoute(route);
+
+             let screen = navigation => {
+               let wholeNavigation = navigationRecordFromJs(navigation);
+               let jsApiNavigationProps =
+                 navigationPropsFromJs(wholeNavigation.navigation);
+               let reasonApiNavigationProps = {
+                 ...jsApiNavigationProps,
+                 navigate: route => {
+                   let (stringRoute, _) = mapRoute(route);
+
+                   let navigateToRoute: string => unit = [%bs.raw
+                     {| function (route) {
+                     navigation.navigation.navigate(route)
+                    }
+                    |}
+                   ];
+
+                   navigateToRoute(stringRoute);
+                   ();
+                 },
+               };
+
+               routeConfig.screen({navigation: reasonApiNavigationProps});
+             };
+
+             (name, routeConfigurationToJs({screen: screen}));
+           })
+        |> Js.Dict.fromList;
+
       _createStackNavigator(
         routes,
         navigatorConfigToJs({initialRouteName: initialRouteName}),
       );
+    };
   };
 };

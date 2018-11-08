@@ -1,4 +1,5 @@
 open BsReactNative;
+
 module Styles = {
   open Style;
 
@@ -12,16 +13,11 @@ module Styles = {
 
 let component = ReasonReact.statelessComponent("App");
 
-let make = (~navigation: string, _children) => {
+let make = (~navigation: Navigation.StackNavigator.navigation, _children) => {
   ...component,
   render: _self => {
-    let toDetails = [%raw
-      {|
-      function(navigation) {
-        navigation.navigation.navigate("Details");
-      }
-    |}
-    ];
+    let toDetails = (navigation: Navigation.StackNavigator.navigation) =>
+      navigation.navigation.navigate(Details);
 
     <SafeAreaView>
       <View style=Styles.container>

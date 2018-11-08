@@ -12,16 +12,12 @@ module Styles = {
 };
 let component = ReasonReact.statelessComponent("App");
 
-let make = (~navigation: string, _children) => {
+let make = (~navigation: Navigation.StackNavigator.navigation, _children) => {
   ...component,
   render: _self => {
-    let goBack = [%raw
-      {|
-    function(navigation) {
+    Js.log(navigation);
+    let goBack = (navigation: Navigation.StackNavigator.navigation) =>
       navigation.navigation.goBack();
-    }
-  |}
-    ];
 
     <SafeAreaView>
       <View style=Styles.container>
