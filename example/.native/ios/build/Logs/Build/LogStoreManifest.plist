@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>9</integer>
+	<key>logs</key>
+	<dict>
+		<key>FA561912-1AE4-429B-9C9B-1A09AB12BBE7</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>FA561912-1AE4-429B-9C9B-1A09AB12BBE7.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>E</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>ReasonDemo project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ReasonDemo</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project ReasonDemo with scheme ReasonDemo and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>564515297.51412702</real>
+			<key>timeStoppedRecording</key>
+			<real>564515300.38080502</real>
+			<key>title</key>
+			<string>Building project ReasonDemo with scheme ReasonDemo and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>FA561912-1AE4-429B-9C9B-1A09AB12BBE7</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
