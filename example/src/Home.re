@@ -12,21 +12,27 @@ module Styles = {
 };
 
 let component = ReasonReact.statelessComponent("App");
+type params = string;
 
-let make = (~navigation: Navigation.StackNavigator.navigation, _children) => {
+let make = (~nav: NavigationConfig.NavigationOptions.t, _children) => {
   ...component,
   render: _self => {
-    let toDetails = (navigation: Navigation.StackNavigator.navigation) =>
-      navigation.navigation.navigate(Details);
+    Js.log2("elo", nav##navigation);
 
     <SafeAreaView>
       <View style=Styles.container>
         <Text> {ReasonReact.string("HOME!")} </Text>
+        <Text> {ReasonReact.string(string_of_int(1))} </Text>
         <Button
           title="Go to details screen "
-          onPress={() => toDetails(navigation)}
+          onPress={() => Js.log("siema")}
         />
       </View>
     </SafeAreaView>;
   },
 };
+
+/* let reactComponent =
+   ReasonReact.wrapReasonForJs(~component, () =>
+     make(~nav={"navigation": "string"}, [||])
+   ); */

@@ -1,10 +1,12 @@
-open Navigation;
+open NavigationConfig;
 
-let mapRoute: StackNavigator.mapRoute =
+let mapRoute: Navigator.mapRoute =
   r =>
     switch (r) {
-    | Home => ("Home", {screen: navigation => <Home navigation />})
-    | Details => ("Details", {screen: navigation => <Details navigation />})
+    | Home => ("Home", {screen: nav => <Home nav />})
+    | Details => ("Details", {screen: nav => <Details nav />})
     };
 
-let reactClass = StackNavigator.navigator(mapRoute);
+let navig = Navigator.configure(mapRoute, Home);
+
+let reactClass = navig;
