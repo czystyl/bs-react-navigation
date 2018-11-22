@@ -1,4 +1,5 @@
 open BsReactNative;
+
 module Styles = {
   open Style;
 
@@ -11,24 +12,21 @@ module Styles = {
 };
 
 let component = ReasonReact.statelessComponent("App");
+type params = string;
 
-let make = (~navigation: string, _children) => {
+let make = (~navigation: Navigation.StackNavigator.navigation, _children) => {
   ...component,
   render: _self => {
-    let toDetails = [%raw
-      {|
-      function(navigation) {
-        navigation.navigation.navigate("Details");
-      }
-    |}
-    ];
+    let toDetails = (navigation: Navigation.StackNavigator.navigation) =>
+      navigation.navigation.navigate(Details);
 
     <SafeAreaView>
       <View style=Styles.container>
         <Text> {ReasonReact.string("HOME!")} </Text>
+        <Text> {ReasonReact.string(string_of_int(1))} </Text>
         <Button
           title="Go to details screen "
-          onPress={() => toDetails(navigation)}
+          onPress={() => nav.push("Details")}
         />
       </View>
     </SafeAreaView>;
