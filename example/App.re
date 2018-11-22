@@ -16,15 +16,20 @@ module Stack =
     /**
      * Initial route to start with. Has to be one of `route` variants.
      */
-    let initialRoute = Details("Mike");
+    let initialRoute = Home;
 
     /**
-     * Returns a screen for a given route and its options
+     * Returns a screen for a given route and its options.
+     *
+     * To declare options, you call `StackNavigator.screenOptions` and provide
+     * same keys as `navigationOptions` of React Navigation.
+     *
+     * This is to allow optional fields to be provided.
      */
     let getScreen = (route, navigation) =>
       switch (route) {
       | Home => (<Screen navigation />, screenOptions(~title="Home", ()))
-      | Details(userId) => (
+      | UserDetails(userId) => (
           <Screen navigation text={"Browsing profile of: " ++ userId} />,
           screenOptions(~title="Hello " ++ userId, ()),
         )

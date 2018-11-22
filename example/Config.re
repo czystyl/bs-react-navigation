@@ -1,4 +1,4 @@
 type route =
   | Home
-  | Details(string);
+  | UserDetails(string);
 type navigation = StackNavigator.navigation(route);
