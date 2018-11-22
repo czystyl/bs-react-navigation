@@ -13,17 +13,9 @@ module Styles = {
 
 let component = ReasonReact.statelessComponent("App");
 
-let make = (~navigation: Config.navigation, ~text: string = "Hi!", _children) => {
+let make = (~navigation: Config.navigation, ~text: string="Hi!", _children) => {
   ...component,
-  render: _self => {
-    let toDetails = [%raw
-      {|
-      function(navigation) {
-        navigation.navigation.navigate("Details");
-      }
-    |}
-    ];
-
+  render: _self =>
     <SafeAreaView>
       <View style=Styles.container>
         <Text> {ReasonReact.string(text)} </Text>
@@ -32,6 +24,5 @@ let make = (~navigation: Config.navigation, ~text: string = "Hi!", _children) =>
           onPress={() => navigation.push(Home)}
         />
       </View>
-    </SafeAreaView>;
-  },
+    </SafeAreaView>,
 };

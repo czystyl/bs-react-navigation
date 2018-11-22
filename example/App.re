@@ -16,20 +16,17 @@ module Stack =
     /**
      * Initial route to start with. Has to be one of `route` variants.
      */
-    let initialRoute = Details("5");
+    let initialRoute = Details("Mike");
 
     /**
      * Returns a screen for a given route and its options
      */
     let getScreen = (route, navigation) =>
       switch (route) {
-      | Home => (
-          <Home navigation text="" />,
-          screenOptions(~title="Home", ()),
-        )
+      | Home => (<Screen navigation />, screenOptions(~title="Home", ()))
       | Details(userId) => (
-          <Home navigation text={"Hello " ++ userId} />,
-          screenOptions(~title="Home " ++ userId, ()),
+          <Screen navigation text={"Browsing profile of: " ++ userId} />,
+          screenOptions(~title="Hello " ++ userId, ()),
         )
       };
   });
