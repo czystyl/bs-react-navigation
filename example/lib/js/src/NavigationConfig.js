@@ -13,14 +13,14 @@ var Config = /* module */[/* routes : :: */[
 
 var include = Stack$BsReactNavigation.Make(Config);
 
-var Navigation = include[0];
+var NavigationProp = include[0];
 
 var NavigationOptions = include[1];
 
 var Navigator = include[2];
 
 exports.Config = Config;
-exports.Navigation = Navigation;
+exports.NavigationProp = NavigationProp;
 exports.NavigationOptions = NavigationOptions;
 exports.Navigator = Navigator;
 /* include Not a pure module */

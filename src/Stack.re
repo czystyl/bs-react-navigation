@@ -5,9 +5,9 @@ module type Configuration = {
 
 module Make = (Config: Configuration) => {
   module NavigationProp = {
-    type t;
-    
-    [@bs.send] external push: string => unit = "push";
+    type t = {. "push": string => unit};
+
+    [@bs.send] external push: (t, string) => unit = "push";
   };
 
   module NavigationOptions = {
@@ -34,7 +34,9 @@ module Make = (Config: Configuration) => {
       ReasonReact.reactElement =
       "createStackNavigator";
 
+    /* Configure stack navigation component */
     let configure = (mapRoute: mapRoute, initial: Config.route) => {
+      /* create RN-navigation config object */
       let routes =
         List.map(
           route => {
@@ -46,9 +48,10 @@ module Make = (Config: Configuration) => {
         )
         |> Js.Dict.fromList;
 
-      let (initial, _) = mapRoute(initial);
+      /* tmp */
+      let (initialRoute, _) = mapRoute(initial);
 
-      _createStackNavigator(routes, {"initialRouteName": initial});
+      _createStackNavigator(routes, {"initialRouteName": initialRoute});
     };
   };
 };

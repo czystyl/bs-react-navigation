@@ -38,7 +38,7 @@ function make(nav, _) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function () {
-              console.log("elo", nav.navigation);
+              console.log("elo", nav);
               return ReasonReact.element(undefined, undefined, Curry.app(SafeAreaView$BsReactNative.make, [
                               undefined,
                               undefined,
@@ -64,8 +64,8 @@ function make(nav, _) {
                                           ReasonReact.element(undefined, undefined, Text$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* array */["HOME!"])),
                                           ReasonReact.element(undefined, undefined, Text$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* array */[String(1)])),
                                           ReasonReact.element(undefined, undefined, Button$BsReactNative.make(undefined, undefined, undefined, (function () {
-                                                        console.log("siema");
-                                                        return /* () */0;
+                                                        var na = nav.navigation.push;
+                                                        return Curry._1(na, "Details");
                                                       }), undefined, "Go to details screen ")(/* array */[]))
                                         ]))]
                             ]));

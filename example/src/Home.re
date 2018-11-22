@@ -17,7 +17,7 @@ type params = string;
 let make = (~nav: NavigationConfig.NavigationOptions.t, _children) => {
   ...component,
   render: _self => {
-    Js.log2("elo", nav##navigation);
+    Js.log2("elo", nav);
 
     <SafeAreaView>
       <View style=Styles.container>
@@ -25,7 +25,13 @@ let make = (~nav: NavigationConfig.NavigationOptions.t, _children) => {
         <Text> {ReasonReact.string(string_of_int(1))} </Text>
         <Button
           title="Go to details screen "
-          onPress={() => Js.log("siema")}
+          onPress={
+            () => {
+              let na = nav##navigation##push;
+              na("Details");
+              /* nav##navigation##push("siema"); */
+            }
+          }
         />
       </View>
     </SafeAreaView>;

@@ -5,7 +5,7 @@ module type Configuration = {
 module Make:
   (Config: Configuration) =>
    {
-    module NavigationProp: {type t;};
+    module NavigationProp: {type t = {. "push": string => unit};};
     module NavigationOptions: {type t = {. "navigation": NavigationProp.t};};
     module Navigator: {
       type configureRoute = {
