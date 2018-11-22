@@ -6,9 +6,20 @@ var Stack$BsReactNavigation = require("./Stack.bs.js");
 
 function render(route, navigation) {
   if (route) {
-    return ReasonReact.element(undefined, undefined, Home$BsReactNavigation.make(navigation, "Hello " + route[0], /* array */[]));
+    var userId = route[0];
+    return /* tuple */[
+            ReasonReact.element(undefined, undefined, Home$BsReactNavigation.make(navigation, "Hello " + userId, /* array */[])),
+            {
+              title: "Home " + userId
+            }
+          ];
   } else {
-    return ReasonReact.element(undefined, undefined, Home$BsReactNavigation.make(navigation, "", /* array */[]));
+    return /* tuple */[
+            ReasonReact.element(undefined, undefined, Home$BsReactNavigation.make(navigation, "", /* array */[])),
+            {
+              title: "Home"
+            }
+          ];
   }
 }
 
@@ -17,7 +28,7 @@ var StackNavigator = Stack$BsReactNavigation.Create(/* module */[
       /* render */render
     ]);
 
-var reactClass = StackNavigator[/* navigator */4];
+var reactClass = StackNavigator[/* navigator */7];
 
 exports.StackNavigator = StackNavigator;
 exports.reactClass = reactClass;

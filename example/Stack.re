@@ -1,12 +1,19 @@
 type navigation('a) = {
   push: 'a => unit,
-  pop: 'a => unit
+  pop: 'a => unit,
+};
+
+[@bs.deriving abstract]
+type options = {
+  [@bs.optional]
+  title: string,
 };
 
 module type StackConfig = {
   type route;
   let initialRoute: route;
-  let render: (route, navigation(route)) => ReasonReact.reactElement;
+  let render:
+    (route, navigation(route)) => (ReasonReact.reactElement, options);
 };
 
 module Create = (Config: StackConfig) => {
@@ -18,49 +25,86 @@ module Create = (Config: StackConfig) => {
 
   module NavigationProp = {
     type t;
-    [@bs.send]
-    external push: (t, string, screenProps) => unit = "push";
+
+    module State = {
+      type t;
+
+      [@bs.get] external getParams: t => option(screenProps) = "params";
+    };
+
+    [@bs.send] external push: (t, string, screenProps) => unit = "push";
+
+    [@bs.get "state"] external getState: t => State.t = "";
+
+    let getParams = t => getState(t) |> State.getParams;
   };
 
   module ScreenOptions = {
-    type t = Js.t({
-      .
-      navigation: NavigationProp.t
-    });
+    type t = {. "navigation": NavigationProp.t};
+  };
+
+  [@bs.deriving abstract]
+  type routeConfig = {
+    params: screenProps,
+    screen: ScreenOptions.t => ReasonReact.reactElement,
+    navigationOptions: ScreenOptions.t => options,
   };
 
   [@bs.module "react-navigation"]
   external _createStackNavigator:
-    (
-      Js.Dict.t({. "screen": ScreenOptions.t => ReasonReact.reactElement}),
-      navigatorConfig
-    ) =>
-    ReasonReact.reactElement =
+    (Js.Dict.t(routeConfig), navigatorConfig) => ReasonReact.reactElement =
     "createStackNavigator";
 
-  module Container = {
-    let displayName = "$ReRoute_Container";
+  [@bs.module "react-navigation"]
+  external _createAppContainer:
+    ReasonReact.reactElement => ReasonReact.reactElement =
+    "createAppContainer";
 
+  let containerDisplayName = "$ReRoute_Container";
+
+  let makeNavigationProp = (navigation: NavigationProp.t) => {
+    push: route =>
+      NavigationProp.push(
+        navigation,
+        containerDisplayName,
+        screenProps(~route),
+      ),
+    pop: _route => (),
+  };
+
+  module Container = {
     let component = ReasonReact.statelessComponent("StackContainer");
 
-    let make = (~route, ~navigation: NavigationProp.t, _children) => {
+    let make = (~navigation: NavigationProp.t, _children) => {
       ...component,
       render: _self => {
-        let navigation: navigation(Config.route) = {
-          push: (route) => NavigationProp.push(navigation, displayName, screenProps(~route)),
-          pop: (_route) => ()
-        };
-        Config.render(route, navigation)
-      }
+        let params = NavigationProp.getParams(navigation) |> Js.Option.getExn;
+        Config.render(routeGet(params), makeNavigationProp(navigation)) |> fst;
+      },
     };
   };
 
-  let routes = Js.Dict.empty();
-  Js.Dict.set(routes, Container.displayName, { "screen": (options: ScreenOptions.t) => <Container route=Config.initialRoute navigation=options##navigation />});
+  let route =
+    routeConfig(
+      ~params=screenProps(~route=Config.initialRoute),
+      ~screen=
+        (options: ScreenOptions.t) =>
+          <Container navigation=options##navigation />,
+      ~navigationOptions=
+        (options: ScreenOptions.t) => {
+          let params = NavigationProp.getParams(options##navigation) |> Js.Option.getExn;
+          Config.render(routeGet(params), makeNavigationProp(options##navigation)) |> snd;
+        },
+    );
 
-  let navigator = 
-    _createStackNavigator(
-      routes,
-      navigatorConfig(~initialRouteName=Container.displayName),
+  let routes = Js.Dict.empty();
+  Js.Dict.set(routes, containerDisplayName, route);
+
+  let navigator =
+    _createAppContainer(
+      _createStackNavigator(
+        routes,
+        navigatorConfig(~initialRouteName=containerDisplayName),
+      ),
     );
 };

@@ -1,15 +1,36 @@
 'use strict';
 
 var Curry = require("bs-platform/lib/js/curry.js");
+var Js_option = require("bs-platform/lib/js/js_option.js");
 var ReasonReact = require("reason-react/src/ReasonReact.js");
 var ReactNavigation = require("react-navigation");
 
 function Create(Config) {
-  var NavigationProp = /* module */[];
+  var State = /* module */[];
+  var getParams = function (t) {
+    return t.state.params;
+  };
+  var NavigationProp = /* module */[
+    /* State */State,
+    /* getParams */getParams
+  ];
   var ScreenOptions = /* module */[];
-  var displayName = "$ReRoute_Container";
+  var containerDisplayName = "$ReRoute_Container";
+  var makeNavigationProp = function (navigation) {
+    return /* record */[
+            /* push */(function (route) {
+                navigation.push(containerDisplayName, {
+                      route: route
+                    });
+                return /* () */0;
+              }),
+            /* pop */(function (_route) {
+                return /* () */0;
+              })
+          ];
+  };
   var component = ReasonReact.statelessComponent("StackContainer");
-  var make = function (route, navigation, _children) {
+  var make = function (navigation, _children) {
     return /* record */[
             /* debugName */component[/* debugName */0],
             /* reactClassInternal */component[/* reactClassInternal */1],
@@ -21,20 +42,8 @@ function Create(Config) {
             /* willUpdate */component[/* willUpdate */7],
             /* shouldUpdate */component[/* shouldUpdate */8],
             /* render */(function (_self) {
-                var navigation_000 = function (route) {
-                  navigation.push(displayName, {
-                        route: route
-                      });
-                  return /* () */0;
-                };
-                var navigation_001 = function (_route) {
-                  return /* () */0;
-                };
-                var navigation$1 = /* record */[
-                  navigation_000,
-                  navigation_001
-                ];
-                return Curry._2(Config[/* render */1], route, navigation$1);
+                var params = Js_option.getExn(navigation.state.params);
+                return Curry._2(Config[/* render */1], params.route, makeNavigationProp(navigation))[0];
               }),
             /* initialState */component[/* initialState */10],
             /* retainedProps */component[/* retainedProps */11],
@@ -43,23 +52,34 @@ function Create(Config) {
           ];
   };
   var Container = /* module */[
-    /* displayName */displayName,
     /* component */component,
     /* make */make
   ];
-  var routes = { };
-  routes[displayName] = {
+  var route = {
+    params: {
+      route: Config[/* initialRoute */0]
+    },
     screen: (function (options) {
-        return ReasonReact.element(undefined, undefined, make(Config[/* initialRoute */0], options.navigation, /* array */[]));
+        return ReasonReact.element(undefined, undefined, make(options.navigation, /* array */[]));
+      }),
+    navigationOptions: (function (options) {
+        var t = options.navigation;
+        var params = Js_option.getExn(t.state.params);
+        return Curry._2(Config[/* render */1], params.route, makeNavigationProp(options.navigation))[1];
       })
   };
-  var $$navigator = ReactNavigation.createStackNavigator(routes, {
-        initialRouteName: displayName
-      });
+  var routes = { };
+  routes[containerDisplayName] = route;
+  var $$navigator = ReactNavigation.createAppContainer(ReactNavigation.createStackNavigator(routes, {
+            initialRouteName: containerDisplayName
+          }));
   return /* module */[
           /* NavigationProp */NavigationProp,
           /* ScreenOptions */ScreenOptions,
+          /* containerDisplayName */containerDisplayName,
+          /* makeNavigationProp */makeNavigationProp,
           /* Container */Container,
+          /* route */route,
           /* routes */routes,
           /* navigator */$$navigator
         ];
