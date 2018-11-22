@@ -4,7 +4,7 @@ type navigation('a) = {
 };
 
 [@bs.deriving abstract]
-type options = {
+type screenOptions = {
   [@bs.optional]
   title: string,
 };
@@ -13,7 +13,7 @@ module type StackConfig = {
   type route;
   let initialRoute: route;
   let getScreen:
-    (route, navigation(route)) => (ReasonReact.reactElement, options);
+    (route, navigation(route)) => (ReasonReact.reactElement, screenOptions);
 };
 
 module Create = (Config: StackConfig) => {
@@ -47,7 +47,7 @@ module Create = (Config: StackConfig) => {
   type routeConfig = {
     params: routeProps,
     screen: ScreenOptions.t => ReasonReact.reactElement,
-    navigationOptions: ScreenOptions.t => options,
+    navigationOptions: ScreenOptions.t => screenOptions,
   };
 
   [@bs.module "react-navigation"]
