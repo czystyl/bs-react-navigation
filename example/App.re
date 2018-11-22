@@ -1,8 +1,8 @@
 open Config;
 
-module StackNavigator =
-  Stack.Create({
-    open Stack;
+module Stack =
+  StackNavigator.Create({
+    open StackNavigator;
 
     type route = Config.route;
     let initialRoute = Details("5");
@@ -17,4 +17,4 @@ module StackNavigator =
       };
   });
 
-let reactClass = StackNavigator.navigator;
+let reactClass = Stack.navigator;

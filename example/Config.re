@@ -1,2 +1,4 @@
-type route = Home | Details(string);
-type navigation = Stack.navigation(route);
+type route =
+  | Home
+  | Details(string);
+type navigation = StackNavigator.navigation(route);
