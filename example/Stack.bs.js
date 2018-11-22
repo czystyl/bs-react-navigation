@@ -32,7 +32,7 @@ function Create(Config) {
   var getCurrentScreen = function (navigation) {
     var params = Js_option.getExn(navigation.state.params);
     var nav = makeNavigationProp(navigation);
-    return Curry._2(Config[/* render */1], params.route, nav);
+    return Curry._2(Config[/* getScreen */1], params.route, nav);
   };
   var component = ReasonReact.statelessComponent("StackContainer");
   var make = function (navigation, _children) {

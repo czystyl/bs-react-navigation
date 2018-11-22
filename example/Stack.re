@@ -12,7 +12,7 @@ type options = {
 module type StackConfig = {
   type route;
   let initialRoute: route;
-  let render:
+  let getScreen:
     (route, navigation(route)) => (ReasonReact.reactElement, options);
 };
 
@@ -21,7 +21,7 @@ module Create = (Config: StackConfig) => {
   type navigatorConfig = {initialRouteName: string};
 
   [@bs.deriving abstract]
-  type screenProps = {route: Config.route};
+  type routeProps = {route: Config.route};
 
   module NavigationProp = {
     type t;
@@ -29,10 +29,10 @@ module Create = (Config: StackConfig) => {
     module State = {
       type t;
 
-      [@bs.get] external getParams: t => option(screenProps) = "params";
+      [@bs.get] external getParams: t => option(routeProps) = "params";
     };
 
-    [@bs.send] external push: (t, string, screenProps) => unit = "push";
+    [@bs.send] external push: (t, string, routeProps) => unit = "push";
 
     [@bs.get "state"] external getState: t => State.t = "";
 
@@ -45,7 +45,7 @@ module Create = (Config: StackConfig) => {
 
   [@bs.deriving abstract]
   type routeConfig = {
-    params: screenProps,
+    params: routeProps,
     screen: ScreenOptions.t => ReasonReact.reactElement,
     navigationOptions: ScreenOptions.t => options,
   };
@@ -67,7 +67,7 @@ module Create = (Config: StackConfig) => {
       NavigationProp.push(
         navigation,
         containerDisplayName,
-        screenProps(~route),
+        routeProps(~route),
       ),
     pop: _route => (),
   };
@@ -76,7 +76,7 @@ module Create = (Config: StackConfig) => {
     /** Params can be `null` in React Navigation, but we are always declaring them */
     let params = NavigationProp.getParams(navigation) |> Js.Option.getExn;
     let nav = makeNavigationProp(navigation);
-    Config.render(routeGet(params), nav);
+    Config.getScreen(routeGet(params), nav);
   };
 
   module Container = {
@@ -90,7 +90,7 @@ module Create = (Config: StackConfig) => {
 
   let route =
     routeConfig(
-      ~params=screenProps(~route=Config.initialRoute),
+      ~params=routeProps(~route=Config.initialRoute),
       ~screen=
         (options: ScreenOptions.t) =>
           <Container navigation=options##navigation />,

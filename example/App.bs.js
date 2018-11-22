@@ -4,7 +4,7 @@ var ReasonReact = require("reason-react/src/ReasonReact.js");
 var Home$BsReactNavigation = require("./Home.bs.js");
 var Stack$BsReactNavigation = require("./Stack.bs.js");
 
-function render(route, navigation) {
+function getScreen(route, navigation) {
   if (route) {
     var userId = route[0];
     return /* tuple */[
@@ -25,7 +25,7 @@ function render(route, navigation) {
 
 var StackNavigator = Stack$BsReactNavigation.Create(/* module */[
       /* initialRoute : Details */["5"],
-      /* render */render
+      /* getScreen */getScreen
     ]);
 
 var reactClass = StackNavigator[/* navigator */8];

@@ -6,12 +6,13 @@ module StackNavigator =
 
     type route = Config.route;
     let initialRoute = Details("5");
-    let render = (route, navigation) =>
+
+    let getScreen = (route, navigation) =>
       switch (route) {
       | Home => (<Home navigation text="" />, options(~title="Home", ()))
       | Details(userId) => (
           <Home navigation text={"Hello " ++ userId} />,
-          options(~title={"Home " ++ userId}, ()),
+          options(~title="Home " ++ userId, ()),
         )
       };
   });
