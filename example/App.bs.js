@@ -28,7 +28,7 @@ var StackNavigator = Stack$BsReactNavigation.Create(/* module */[
       /* render */render
     ]);
 
-var reactClass = StackNavigator[/* navigator */7];
+var reactClass = StackNavigator[/* navigator */8];
 
 exports.StackNavigator = StackNavigator;
 exports.reactClass = reactClass;

@@ -29,6 +29,11 @@ function Create(Config) {
               })
           ];
   };
+  var getCurrentScreen = function (navigation) {
+    var params = Js_option.getExn(navigation.state.params);
+    var nav = makeNavigationProp(navigation);
+    return Curry._2(Config[/* render */1], params.route, nav);
+  };
   var component = ReasonReact.statelessComponent("StackContainer");
   var make = function (navigation, _children) {
     return /* record */[
@@ -42,8 +47,7 @@ function Create(Config) {
             /* willUpdate */component[/* willUpdate */7],
             /* shouldUpdate */component[/* shouldUpdate */8],
             /* render */(function (_self) {
-                var params = Js_option.getExn(navigation.state.params);
-                return Curry._2(Config[/* render */1], params.route, makeNavigationProp(navigation))[0];
+                return getCurrentScreen(navigation)[0];
               }),
             /* initialState */component[/* initialState */10],
             /* retainedProps */component[/* retainedProps */11],
@@ -63,9 +67,7 @@ function Create(Config) {
         return ReasonReact.element(undefined, undefined, make(options.navigation, /* array */[]));
       }),
     navigationOptions: (function (options) {
-        var t = options.navigation;
-        var params = Js_option.getExn(t.state.params);
-        return Curry._2(Config[/* render */1], params.route, makeNavigationProp(options.navigation))[1];
+        return getCurrentScreen(options.navigation)[1];
       })
   };
   var routes = { };
@@ -78,6 +80,7 @@ function Create(Config) {
           /* ScreenOptions */ScreenOptions,
           /* containerDisplayName */containerDisplayName,
           /* makeNavigationProp */makeNavigationProp,
+          /* getCurrentScreen */getCurrentScreen,
           /* Container */Container,
           /* route */route,
           /* routes */routes,

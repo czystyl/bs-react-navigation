@@ -72,15 +72,19 @@ module Create = (Config: StackConfig) => {
     pop: _route => (),
   };
 
+  let getCurrentScreen = (navigation: NavigationProp.t) => {
+    /** Params can be `null` in React Navigation, but we are always declaring them */
+    let params = NavigationProp.getParams(navigation) |> Js.Option.getExn;
+    let nav = makeNavigationProp(navigation);
+    Config.render(routeGet(params), nav);
+  };
+
   module Container = {
     let component = ReasonReact.statelessComponent("StackContainer");
 
     let make = (~navigation: NavigationProp.t, _children) => {
       ...component,
-      render: _self => {
-        let params = NavigationProp.getParams(navigation) |> Js.Option.getExn;
-        Config.render(routeGet(params), makeNavigationProp(navigation)) |> fst;
-      },
+      render: _self => getCurrentScreen(navigation) |> fst,
     };
   };
 
@@ -91,10 +95,8 @@ module Create = (Config: StackConfig) => {
         (options: ScreenOptions.t) =>
           <Container navigation=options##navigation />,
       ~navigationOptions=
-        (options: ScreenOptions.t) => {
-          let params = NavigationProp.getParams(options##navigation) |> Js.Option.getExn;
-          Config.render(routeGet(params), makeNavigationProp(options##navigation)) |> snd;
-        },
+        (options: ScreenOptions.t) =>
+          getCurrentScreen(options##navigation) |> snd,
     );
 
   let routes = Js.Dict.empty();
