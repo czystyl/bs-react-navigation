@@ -14,11 +14,9 @@ module Styles = {
 let component = ReasonReact.statelessComponent("App");
 type params = string;
 
-let make = (~nav: NavigationConfig.NavigationOptions.t, _children) => {
+let make = (~nav: NavigationConfig.Navigator.navigationProp, _children) => {
   ...component,
-  render: _self => {
-    Js.log2("elo", nav);
-
+  render: _self =>
     <SafeAreaView>
       <View style=Styles.container>
         <Text> {ReasonReact.string("HOME!")} </Text>
@@ -27,15 +25,15 @@ let make = (~nav: NavigationConfig.NavigationOptions.t, _children) => {
           title="Go to details screen "
           onPress={
             () => {
-              let na = nav##navigation##push;
-              na("Details");
+              Js.log(nav.push("Details"));
+              /* let na = nav##navigation##push; */
+              ();
               /* nav##navigation##push("siema"); */
             }
           }
         />
       </View>
-    </SafeAreaView>;
-  },
+    </SafeAreaView>,
 };
 
 /* let reactComponent =

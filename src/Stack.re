@@ -4,51 +4,54 @@ module type Configuration = {
 };
 
 module Make = (Config: Configuration) => {
-  module NavigationProp = {
-    type t = {. "push": string => unit};
-
-    [@bs.send] external push: (t, string) => unit = "push";
-  };
-
-  module NavigationOptions = {
-    type t = {. "navigation": NavigationProp.t};
-  };
-
   module Navigator = {
     [@bs.deriving jsConverter]
-    type configureRoute = {
-      screen: NavigationOptions.t => ReasonReact.reactElement,
+    type navigationProp = {
+      push: string => unit,
+      goBack: unit => unit,
     };
 
-    type mapRoute = Config.route => (string, configureRoute);
+    [@bs.deriving jsConverter]
+    type configureRoute = {
+      screen: navigationProp => ReasonReact.reactElement,
+    };
 
     [@bs.module "react-navigation"]
     external _createStackNavigator:
       (
         Js.Dict.t({
           .
-          "screen": NavigationOptions.t => ReasonReact.reactElement,
+          "screen":
+            Js.t({.. navigation: {.. "push": string => unit}} as 'a) =>
+            ReasonReact.reactElement,
         }),
         {. "initialRouteName": string}
       ) =>
       ReasonReact.reactElement =
       "createStackNavigator";
 
-    /* Configure stack navigation component */
+    type mapRoute = Config.route => (string, configureRoute);
+
     let configure = (mapRoute: mapRoute, initial: Config.route) => {
-      /* create RN-navigation config object */
       let routes =
         List.map(
           route => {
-            let (name, rest) = mapRoute(route);
+            let (name, config) = mapRoute(route);
 
-            (name, configureRouteToJs(rest));
+            let makeNavigationProp = orgNav => {
+              let nav = navigationPropFromJs(orgNav##navigation);
+
+              config.screen(nav);
+            };
+
+            let optioin = {"screen": makeNavigationProp};
+
+            (name, optioin);
           },
           Config.routes,
         )
         |> Js.Dict.fromList;
 
-      /* tmp */
       let (initialRoute, _) = mapRoute(initial);
 
       _createStackNavigator(routes, {"initialRouteName": initialRoute});
