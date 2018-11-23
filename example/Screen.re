@@ -20,9 +20,14 @@ let make = (~navigation: Config.navigation, ~text: string="Hi!", _children) => {
       <View style=Styles.container>
         <Text> {ReasonReact.string(text)} </Text>
         <Button
-          title="Go to details screen "
+          title="Go to details screen"
           onPress={() => navigation.push(UserDetails("Mike Grabowski"))}
         />
+        {
+          navigation.state.index > 0 ?
+            <Button title="Go back" onPress={() => navigation.pop()} /> :
+            ReasonReact.null
+        }
       </View>
     </SafeAreaView>,
 };

@@ -1,6 +1,9 @@
+type state = {index: int};
+
 type navigation('a) = {
   push: 'a => unit,
-  pop: 'a => unit,
+  pop: unit => unit,
+  state,
 };
 
 [@bs.deriving abstract]
@@ -24,7 +27,6 @@ module Create = (Config: StackConfig) => {
   type routeProps = {route: Config.route};
 
   module Navigation = {
-    type state;
     type t = {. "state": state};
 
     [@bs.send] external push: (t, string, routeProps) => unit = "push";
@@ -63,6 +65,7 @@ module Create = (Config: StackConfig) => {
       push: route =>
         push(navigation, containerDisplayName, routeProps(~route)),
       pop: _route => goBack(navigation),
+      state: navigation##state,
     };
 
   let getCurrentScreen = (navigation: Navigation.t) => {
@@ -72,21 +75,12 @@ module Create = (Config: StackConfig) => {
     Config.getScreen(routeGet(params), nav);
   };
 
-  module Container = {
-    let component = ReasonReact.statelessComponent("StackContainer");
-
-    let make = (~navigation: Navigation.t, _children) => {
-      ...component,
-      render: _self => getCurrentScreen(navigation) |> fst,
-    };
-  };
-
   let route =
     routeConfig(
       ~params=routeProps(~route=Config.initialRoute),
       ~screen=
         (options: ScreenOptions.t) =>
-          <Container navigation=options##navigation />,
+          getCurrentScreen(options##navigation) |> fst,
       ~navigationOptions=
         (options: ScreenOptions.t) =>
           getCurrentScreen(options##navigation) |> snd,
