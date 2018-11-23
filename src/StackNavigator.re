@@ -1,4 +1,5 @@
-type state = {index: int};
+[@bs.deriving jsConverter]
+type state = {key: string};
 
 type navigation('a) = {
   push: 'a => unit,
@@ -27,11 +28,12 @@ module Create = (Config: StackConfig) => {
   type routeProps = {route: Config.route};
 
   module Navigation = {
+    type state = {. "key": string};
     type t = {. "state": state};
 
     [@bs.send] external push: (t, string, routeProps) => unit = "push";
 
-    [@bs.send] external goBack: t => unit = "goBack";
+    [@bs.send] external pop: t => unit = "pop";
 
     [@bs.get] external _getParams: state => option(routeProps) = "params";
     let getParams = nav => _getParams(nav##state);
@@ -64,8 +66,8 @@ module Create = (Config: StackConfig) => {
     Navigation.{
       push: route =>
         push(navigation, containerDisplayName, routeProps(~route)),
-      pop: _route => goBack(navigation),
-      state: navigation##state,
+      pop: _route => pop(navigation),
+      state: stateFromJs(navigation##state),
     };
 
   let getCurrentScreen = (navigation: Navigation.t) => {
