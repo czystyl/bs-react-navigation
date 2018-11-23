@@ -24,19 +24,13 @@ module Create = (Config: StackConfig) => {
   type routeProps = {route: Config.route};
 
   module NavigationProp = {
-    type t;
-
-    module State = {
-      type t;
-
-      [@bs.get] external getParams: t => option(routeProps) = "params";
-    };
+    type state;
+    type t = {. "state": state};
 
     [@bs.send] external push: (t, string, routeProps) => unit = "push";
 
-    [@bs.get "state"] external getState: t => State.t = "";
-
-    let getParams = t => getState(t) |> State.getParams;
+    [@bs.get] external _getParams: state => option(routeProps) = "params";
+    let getParams = nav => _getParams(nav##state);
   };
 
   module ScreenOptions = {
