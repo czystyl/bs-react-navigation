@@ -71,7 +71,10 @@ module Create = (Config: StackConfig) => {
     };
 
   let getCurrentScreen = (navigation: Navigation.t) => {
-    /** Params can be `null` in React Navigation, but we are always declaring them */
+    /**
+     * Params can be `null` in React Navigation, but since we are always
+     * declaring them, we can safely access it.
+     */
     let params = Navigation.getParams(navigation) |> Js.Option.getExn;
     let nav = makeNavigationProp(navigation);
     Config.getScreen(routeGet(params), nav);
