@@ -6,6 +6,35 @@
 	<integer>9</integer>
 	<key>logs</key>
 	<dict>
+		<key>CF93476A-46E2-4473-9A82-A3A0FC0C00D0</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>CF93476A-46E2-4473-9A82-A3A0FC0C00D0.xcactivitylog</string>
+			<key>highLevelStatus</key>
+			<string>E</string>
+			<key>schemeIdentifier-containerName</key>
+			<string>ReasonDemo project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>ReasonDemo</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project ReasonDemo with scheme ReasonDemo and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>564657890.229599</real>
+			<key>timeStoppedRecording</key>
+			<real>564657891.61824095</real>
+			<key>title</key>
+			<string>Building project ReasonDemo with scheme ReasonDemo and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>CF93476A-46E2-4473-9A82-A3A0FC0C00D0</string>
+		</dict>
 		<key>FA561912-1AE4-429B-9C9B-1A09AB12BBE7</key>
 		<dict>
 			<key>className</key>
