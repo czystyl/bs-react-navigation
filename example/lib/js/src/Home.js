@@ -26,7 +26,7 @@ var Styles = /* module */[/* container */container];
 
 var component = ReasonReact.statelessComponent("App");
 
-function make(nav, _) {
+function make(navigation, _) {
   return /* record */[
           /* debugName */component[/* debugName */0],
           /* reactClassInternal */component[/* reactClassInternal */1],
@@ -63,7 +63,7 @@ function make(nav, _) {
                                           ReasonReact.element(undefined, undefined, Text$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* array */["HOME!"])),
                                           ReasonReact.element(undefined, undefined, Text$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* array */[String(1)])),
                                           ReasonReact.element(undefined, undefined, Button$BsReactNative.make(undefined, undefined, undefined, (function () {
-                                                        return Curry._1(nav[/* push */0], "Details");
+                                                        return Curry._1(navigation[/* push */0], "Details");
                                                       }), undefined, "Go to details screen ")(/* array */[]))
                                         ]))]
                             ]));

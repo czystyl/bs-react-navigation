@@ -7,25 +7,25 @@ var Details = require("./Details.js");
 var ReasonReact = require("reason-react/lib/js/src/ReasonReact.js");
 var NavigationConfig = require("./NavigationConfig.js");
 
-function mapRoute(route) {
-  if (route) {
+function mapRoute(r) {
+  if (r) {
     return /* tuple */[
             "Details",
-            /* record */[/* screen */(function (nav) {
-                  return ReasonReact.element(undefined, undefined, Details.make(nav, /* array */[]));
+            /* record */[/* screen */(function (navigation) {
+                  return ReasonReact.element(undefined, undefined, Details.make(navigation, /* array */[]));
                 })]
           ];
   } else {
     return /* tuple */[
             "Home",
-            /* record */[/* screen */(function (nav) {
-                  return ReasonReact.element(undefined, undefined, Home.make(nav, /* array */[]));
+            /* record */[/* screen */(function (navigation) {
+                  return ReasonReact.element(undefined, undefined, Home.make(navigation, /* array */[]));
                 })]
           ];
   }
 }
 
-var reactClass = Curry._2(NavigationConfig.Navigator[/* configure */4], mapRoute, /* Home */0);
+var reactClass = Curry._1(NavigationConfig.Navigator[/* configure */4], mapRoute);
 
 exports.mapRoute = mapRoute;
 exports.reactClass = reactClass;

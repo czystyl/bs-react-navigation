@@ -12,18 +12,13 @@ module Styles = {
 };
 let component = ReasonReact.statelessComponent("App");
 
-let make = (~navigation: Navigation.StackNavigator.navigation, _children) => {
+let make = (~navigation: NavigationConfig.Navigator.navigationProp, _children) => {
   ...component,
-  render: _self => {
-    Js.log(navigation);
-    let goBack = (navigation: Navigation.StackNavigator.navigation) =>
-      navigation.navigation.goBack();
-
+  render: _self =>
     <SafeAreaView>
       <View style=Styles.container>
         <Text> {ReasonReact.string("Detail!")} </Text>
-        <Button title="Go back" onPress={() => nav.goBack()} />
+        <Button title="Go back" onPress={() => navigation.goBack()} />
       </View>
-    </SafeAreaView>;
-  },
+    </SafeAreaView>,
 };

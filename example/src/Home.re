@@ -14,21 +14,17 @@ module Styles = {
 let component = ReasonReact.statelessComponent("App");
 type params = string;
 
-let make = (~navigation: Navigation.StackNavigator.navigation, _children) => {
+let make = (~navigation: NavigationConfig.Navigator.navigationProp, _children) => {
   ...component,
-  render: _self => {
-    let toDetails = (navigation: Navigation.StackNavigator.navigation) =>
-      navigation.navigation.navigate(Details);
-
+  render: _self =>
     <SafeAreaView>
       <View style=Styles.container>
         <Text> {ReasonReact.string("HOME!")} </Text>
         <Text> {ReasonReact.string(string_of_int(1))} </Text>
         <Button
           title="Go to details screen "
-          onPress={() => nav.push("Details")}
+          onPress={() => navigation.push("Details")}
         />
       </View>
-    </SafeAreaView>;
-  },
+    </SafeAreaView>,
 };
