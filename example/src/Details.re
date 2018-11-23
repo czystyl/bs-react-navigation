@@ -1,5 +1,5 @@
 open BsReactNative;
-
+open NavigationConfig;
 module Styles = {
   open Style;
 
@@ -12,7 +12,7 @@ module Styles = {
 };
 let component = ReasonReact.statelessComponent("App");
 
-let make = (~navigation: NavigationConfig.Navigator.navigationProp, _children) => {
+let make = (~navigation: Navigator.navigationProp, _children) => {
   ...component,
   render: _self =>
     <SafeAreaView>

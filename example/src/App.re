@@ -7,4 +7,4 @@ let mapRoute: Navigator.mapRoute =
     | Details => ("Details", {screen: navigation => <Details navigation />})
     };
 
-let reactClass = Navigator.configure(mapRoute);
+let reactClass = Navigator.configure(mapRoute, Home);

@@ -17,18 +17,12 @@ module Make = (Config: Configuration) => {
     };
 
     [@bs.module "react-navigation"]
-    external _createStackNavigator:
-      (
-        Js.Dict.t({
-          .
-          "screen":
-            Js.t({.. navigation: {.. "push": string => unit}} as 'a) =>
-            ReasonReact.reactElement,
-        }),
-        {. "initialRouteName": string}
-      ) =>
-      ReasonReact.reactElement =
+    external _createStackNavigator: ('a, 'b) => ReasonReact.reactElement =
       "createStackNavigator";
+
+    [@bs.module "react-navigation"]
+    external _createAppContainer: 'a => ReasonReact.reactElement =
+      "createAppContainer";
 
     type mapRoute = Config.route => (string, configureRoute);
 
@@ -54,7 +48,9 @@ module Make = (Config: Configuration) => {
 
       let (initialRoute, _) = mapRoute(initial);
 
-      _createStackNavigator(routes, {"initialRouteName": initialRoute});
+      _createAppContainer(
+        _createStackNavigator(routes, {"initialRouteName": initialRoute}),
+      );
     };
   };
 };
