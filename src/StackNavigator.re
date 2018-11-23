@@ -23,18 +23,20 @@ module Create = (Config: StackConfig) => {
   [@bs.deriving abstract]
   type routeProps = {route: Config.route};
 
-  module NavigationProp = {
+  module Navigation = {
     type state;
     type t = {. "state": state};
 
     [@bs.send] external push: (t, string, routeProps) => unit = "push";
+
+    [@bs.send] external goBack: t => unit = "goBack";
 
     [@bs.get] external _getParams: state => option(routeProps) = "params";
     let getParams = nav => _getParams(nav##state);
   };
 
   module ScreenOptions = {
-    type t = {. "navigation": NavigationProp.t};
+    type t = {. "navigation": Navigation.t};
   };
 
   [@bs.deriving abstract]
@@ -56,27 +58,24 @@ module Create = (Config: StackConfig) => {
 
   let containerDisplayName = "$ReRoute_Container";
 
-  let makeNavigationProp = (navigation: NavigationProp.t) => {
-    push: route =>
-      NavigationProp.push(
-        navigation,
-        containerDisplayName,
-        routeProps(~route),
-      ),
-    pop: _route => (),
-  };
+  let makeNavigation = (navigation: Navigation.t) =>
+    Navigation.{
+      push: route =>
+        push(navigation, containerDisplayName, routeProps(~route)),
+      pop: _route => goBack(navigation),
+    };
 
-  let getCurrentScreen = (navigation: NavigationProp.t) => {
+  let getCurrentScreen = (navigation: Navigation.t) => {
     /** Params can be `null` in React Navigation, but we are always declaring them */
-    let params = NavigationProp.getParams(navigation) |> Js.Option.getExn;
-    let nav = makeNavigationProp(navigation);
+    let params = Navigation.getParams(navigation) |> Js.Option.getExn;
+    let nav = makeNavigation(navigation);
     Config.getScreen(routeGet(params), nav);
   };
 
   module Container = {
     let component = ReasonReact.statelessComponent("StackContainer");
 
-    let make = (~navigation: NavigationProp.t, _children) => {
+    let make = (~navigation: Navigation.t, _children) => {
       ...component,
       render: _self => getCurrentScreen(navigation) |> fst,
     };
