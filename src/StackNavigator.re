@@ -62,18 +62,18 @@ module Create = (Config: StackConfig) => {
 
   let containerDisplayName = "$ReRoute_Container";
 
-  let makeNavigation = (navigation: Navigation.t) =>
+  let makeNavigationProp = (navigation: Navigation.t) =>
     Navigation.{
       push: route =>
         push(navigation, containerDisplayName, routeProps(~route)),
-      pop: _route => pop(navigation),
+      pop: () => pop(navigation),
       state: stateFromJs(navigation##state),
     };
 
   let getCurrentScreen = (navigation: Navigation.t) => {
     /** Params can be `null` in React Navigation, but we are always declaring them */
     let params = Navigation.getParams(navigation) |> Js.Option.getExn;
-    let nav = makeNavigation(navigation);
+    let nav = makeNavigationProp(navigation);
     Config.getScreen(routeGet(params), nav);
   };
 
