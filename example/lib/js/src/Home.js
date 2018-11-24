@@ -63,7 +63,7 @@ function make(navigation, _) {
                                           ReasonReact.element(undefined, undefined, Text$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* array */["HOME!"])),
                                           ReasonReact.element(undefined, undefined, Text$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* array */[String(1)])),
                                           ReasonReact.element(undefined, undefined, Button$BsReactNative.make(undefined, undefined, undefined, (function () {
-                                                        return Curry._1(navigation[/* push */0], /* Details */["Simea"]);
+                                                        return Curry._1(navigation[/* push */0], /* Details */["Igor"]);
                                                       }), undefined, "Go to details screen ")(/* array */[]))
                                         ]))]
                             ]));

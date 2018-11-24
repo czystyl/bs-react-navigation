@@ -24,7 +24,7 @@ let make = (~navigation: Navigator.navigationProp, _children) => {
         <Text> {ReasonReact.string(string_of_int(1))} </Text>
         <Button
           title="Go to details screen "
-          onPress={() => navigation.push(Details(Some("Simea")))}
+          onPress={() => navigation.push(Details(Some("Igor")))}
         />
       </View>
     </SafeAreaView>,
