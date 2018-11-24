@@ -6,7 +6,7 @@ var Stack$BsReactNavigation = require("bs-react-navigation/lib/js/src/Stack.js")
 var Config = /* module */[/* routes : :: */[
     /* Home */0,
     /* :: */[
-      /* Details */1,
+      /* Details */[undefined],
       /* [] */0
     ]
   ]];

@@ -14,11 +14,14 @@ let component = ReasonReact.statelessComponent("App");
 
 let make = (~navigation: Navigator.navigationProp, _children) => {
   ...component,
-  render: _self =>
+  render: _self => {
+    Js.log(navigation.state);
+
     <SafeAreaView>
       <View style=Styles.container>
-        <Text> {ReasonReact.string("Detail!")} </Text>
+        <Text> {ReasonReact.string("Hello")} </Text>
         <Button title="Go back" onPress={() => navigation.goBack()} />
       </View>
-    </SafeAreaView>,
+    </SafeAreaView>;
+  },
 };

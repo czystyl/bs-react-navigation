@@ -3,9 +3,9 @@ open BsReactNavigation;
 module Config = {
   type route =
     | Home
-    | Details;
+    | Details(option(string));
 
-  let routes = [Home, Details];
+  let routes = [Home, Details(None)];
 };
 
 include Stack.Make(Config);
