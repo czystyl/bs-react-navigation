@@ -27,17 +27,17 @@
     "type": "git",
     "url": "https://github.com/reasonml-community/bs-react-navigation.git"
   },
-  "devDependencies": {
-    "all-contributors-cli": "^5.4.0",
-    "bs-platform": "^4.0.6",
-    "live-server": "^1.2.0",
-    "reason-react": "^0.5.3",
-    "react-navigation": "^2.18.0",
-    "react-native": "^0.57.3"
-  },
-  "peerDependencies": {
+  "dependencies": {
     "react-navigation": "^2.18.0",
     "react": "^16.5.2",
-    "reason-react": "^0.5.3"
+    "reason-react": "^0.5.3",
+    "react-native": "^0.54.4"
+  },
+  "devDependencies": {
+    "all-contributors-cli": "^5.4.0",
+    "bs-platform": "^4.0.6"
+  },
+  "peerDependencies": {
+    "react-native": "*"
   }
 }

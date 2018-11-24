@@ -1,10 +1,23 @@
-let component = ReasonReact.statelessComponent("Home");
+open BsReactNavigation;
 
-let reactClass =
-  BsReactNavigation.Navigation.createStackNavigator(
-    Home.reactClass,
-    Detail.reactClass,
-  );
+module Config = {
+  open StackNavigator;
 
-/* let reactClass = nav(Home.reactClass, Detail.reactClass); */
-/* let reactClass = Detail.reactClass; */
+  type routes =
+    | Home
+    | Details;
+
+  let navigatorConfig = {initialRouteName: Home};
+
+  let routes = [Home, Details];
+
+  let mapRoute = r =>
+    switch (r) {
+    | Home => ("Home", {screen: navigation => <Home navigation />})
+    | Details => ("Details", {screen: navigation => <Details navigation />})
+    };
+};
+
+include StackNavigator.CreateStackNavigator(Config);
+
+let reactClass = StackNavigator.navigator;
