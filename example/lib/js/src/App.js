@@ -25,7 +25,7 @@ function mapRoute(r) {
   }
 }
 
-var reactClass = Curry._2(NavigationConfig.Navigator[/* configure */4], mapRoute, /* Home */0);
+var reactClass = Curry._2(NavigationConfig.Navigator[/* configure */6], mapRoute, /* Home */0);
 
 exports.mapRoute = mapRoute;
 exports.reactClass = reactClass;

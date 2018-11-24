@@ -6,17 +6,22 @@ module type Configuration = {
 module Make = (Config: Configuration) => {
   module Navigator = {
     [@bs.deriving jsConverter]
+    type state = {key: string};
+
+    type stateJ = {. "key": string};
+
+    [@bs.deriving jsConverter]
     type navigationProp = {
       push: Config.route => unit,
       goBack: unit => unit,
-      state: string,
+      state,
     };
 
     type navprop = {
       .
       "push": Config.route => unit,
       "goBack": unit => unit,
-      "state": string,
+      "state": stateJ,
     };
 
     [@bs.send] external _push: (navprop, string, 'a) => unit = "push";
@@ -44,17 +49,15 @@ module Make = (Config: Configuration) => {
             let (name, config) = mapRoute(route);
 
             let makeNavigationProp = orgNav => {
-              /* Js.log(orgNav); */
               let bindPush = r => {
                 let (name, _) = mapRoute(r);
-
                 _push(orgNav##navigation, name, [%bs.raw {| r[0] |}]);
               };
 
               let nav = {
                 push: bindPush,
                 goBack: _goBack(orgNav##navigation),
-                state: orgNav##navigation##state,
+                state: stateFromJs(orgNav##navigation##state),
               };
 
               config.screen(nav);
