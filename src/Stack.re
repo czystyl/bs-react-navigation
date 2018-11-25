@@ -1,14 +1,22 @@
 module type Configuration = {
   type route;
+
   let routes: list(route);
 };
 
 module Make = (Config: Configuration) => {
   module Navigator = {
     [@bs.deriving jsConverter]
-    type state = {key: string};
+    type state = {
+      key: string,
+      params: string,
+    };
 
-    type stateJ = {. "key": string};
+    type stateJ = {
+      .
+      "key": string,
+      "params": string,
+    };
 
     [@bs.deriving jsConverter]
     type navigationProp = {

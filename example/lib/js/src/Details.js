@@ -3,6 +3,7 @@
 
 var Block = require("bs-platform/lib/js/block.js");
 var Curry = require("bs-platform/lib/js/curry.js");
+var Random = require("bs-platform/lib/js/random.js");
 var ReasonReact = require("reason-react/lib/js/src/ReasonReact.js");
 var Js_primitive = require("bs-platform/lib/js/js_primitive.js");
 var Text$BsReactNative = require("bs-react-native/lib/js/src/components/text.js");
@@ -38,6 +39,8 @@ function make(navigation, _) {
           /* willUpdate */component[/* willUpdate */7],
           /* shouldUpdate */component[/* shouldUpdate */8],
           /* render */(function () {
+              var getRandStr = String(Random.$$int(1123));
+              var title = "Go to details screen with params" + getRandStr;
               return ReasonReact.element(undefined, undefined, Curry.app(SafeAreaView$BsReactNative.make, [
                               undefined,
                               undefined,
@@ -60,10 +63,14 @@ function make(navigation, _) {
                               undefined,
                               undefined,
                               /* array */[ReasonReact.element(undefined, undefined, View$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, Js_primitive.some(container), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* array */[
-                                          ReasonReact.element(undefined, undefined, Text$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* array */["Details screen key: " + navigation[/* state */2][/* key */0]])),
+                                          ReasonReact.element(undefined, undefined, Text$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* array */["Params : " + navigation[/* state */2][/* params */1]])),
+                                          ReasonReact.element(undefined, undefined, Button$BsReactNative.make(undefined, undefined, undefined, (function () {
+                                                        return Curry._1(navigation[/* push */0], /* Details */["Params " + getRandStr]);
+                                                      }), undefined, title)(/* array */[])),
                                           ReasonReact.element(undefined, undefined, Button$BsReactNative.make(undefined, undefined, undefined, (function () {
                                                         return Curry._1(navigation[/* goBack */1], /* () */0);
-                                                      }), undefined, "Go back")(/* array */[]))
+                                                      }), undefined, "Go back")(/* array */[])),
+                                          ReasonReact.element(undefined, undefined, Text$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* array */["Details screen key: " + navigation[/* state */2][/* key */0]]))
                                         ]))]
                             ]));
             }),

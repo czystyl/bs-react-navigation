@@ -20,13 +20,13 @@ let make = (~navigation: Navigator.navigationProp, _children) => {
   render: _self =>
     <SafeAreaView>
       <View style=Styles.container>
+        <Button
+          title="Go to details screen with no params"
+          onPress={() => navigation.push(Details(None))}
+        />
         <Text>
           {ReasonReact.string("Home screen key: " ++ navigation.state.key)}
         </Text>
-        <Button
-          title="Go to details screen "
-          onPress={() => navigation.push(Details(Some("Igor")))}
-        />
       </View>
     </SafeAreaView>,
 };

@@ -60,10 +60,10 @@ function make(navigation, _) {
                               undefined,
                               undefined,
                               /* array */[ReasonReact.element(undefined, undefined, View$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, Js_primitive.some(container), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)(/* array */[
-                                          ReasonReact.element(undefined, undefined, Text$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* array */["Home screen key: " + navigation[/* state */2][/* key */0]])),
                                           ReasonReact.element(undefined, undefined, Button$BsReactNative.make(undefined, undefined, undefined, (function () {
-                                                        return Curry._1(navigation[/* push */0], /* Details */["Igor"]);
-                                                      }), undefined, "Go to details screen ")(/* array */[]))
+                                                        return Curry._1(navigation[/* push */0], /* Details */[undefined]);
+                                                      }), undefined, "Go to details screen with no params")(/* array */[])),
+                                          ReasonReact.element(undefined, undefined, Text$BsReactNative.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* array */["Home screen key: " + navigation[/* state */2][/* key */0]]))
                                         ]))]
                             ]));
             }),
