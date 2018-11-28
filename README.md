@@ -12,7 +12,7 @@
 
 > [BuckleScript](https://github.com/bucklescript/bucklescript) bindings for [React Navigation](https://reactnavigation.org/)
 
-You can run the [playground](./example) with Expo: https://expo.io/@czysty/bs-react-navigation-playground.
+You can run the [playground](./example) with Expo: https://expo.io/@czystyl/bs-react-navigation-playground.
 
 ## Documentation
 
