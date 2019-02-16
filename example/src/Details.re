@@ -1,39 +1,35 @@
-open BsReactNative;
-open NavigationConfig;
-module Styles = {
-  open Style;
+/* open BsReactNative;
 
-  let container =
-    style([
-      marginTop(Pt(50.0)),
-      alignItems(Center),
-      justifyContent(Center),
-    ]);
-};
-let component = ReasonReact.statelessComponent("App");
+   module Styles = {
+     open Style;
 
-let make = (~navigation: Navigator.navigationProp, _children) => {
-  ...component,
-  render: _self => {
-    let getRandStr = string_of_int(Random.int(1123));
-    let title = "Go to details screen with params" ++ getRandStr;
+     let container =
+       style([
+         marginTop(Pt(50.0)),
+         alignItems(Center),
+         justifyContent(Center),
+       ]);
+   };
+   let component = ReasonReact.statelessComponent("App");
 
-    <SafeAreaView>
-      <View style=Styles.container>
-        <Text>
-          {ReasonReact.string("Params : " ++ navigation.state.params)}
-        </Text>
-        <Button
-          title
-          onPress={
-            () => navigation.push(Details(Some("Params " ++ getRandStr)))
-          }
-        />
-        <Button title="Go back" onPress={() => navigation.goBack()} />
-        <Text>
-          {ReasonReact.string("Details screen key: " ++ navigation.state.key)}
-        </Text>
-      </View>
-    </SafeAreaView>;
-  },
-};
+   type params = int;
+
+   let make =
+       (~navigation: NavigationConfig.Navigation.t, ~params: params, _children) => {
+     ...component,
+     render: _self => {
+       Js.log(params);
+       let getRandStr = string_of_int(Random.int(1123));
+
+       let test = navigation.push(`Home);
+
+       let _title = "Go to details screen with params" ++ getRandStr;
+       Js.log(navigation);
+
+       <SafeAreaView>
+         <View style=Styles.container>
+           <Text> {ReasonReact.string("Params : ")} </Text>
+         </View>
+       </SafeAreaView>;
+     },
+   }; */

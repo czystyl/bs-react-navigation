@@ -1,10 +1,9 @@
 {
   "expo": {
-    "name": "bs-react-navigation-playground",
-    "description": "Playground of react-navigation bindings",
-    "slug": "bs-react-navigation-playground",
+    "name": "expo",
+    "slug": "expo",
     "privacy": "public",
-    "sdkVersion": "30.0.0",
+    "sdkVersion": "31.0.0",
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -17,12 +16,13 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "packagerOpts": {
-      "config": "rn-cli.config.js"
-    },
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
+    },
+    "packagerOpts": {
+      "config": "./metro.config.js",
+      "projectRoots": ""
     }
   }
 }
